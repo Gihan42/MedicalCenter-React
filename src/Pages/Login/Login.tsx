@@ -1,5 +1,5 @@
 import React, { Component, FormEvent } from 'react'
-import backgroundImage from '../../assets/medium-shot-doctors-wearing-protective-equipment.jpg'
+import backgroundImage from '../../assets/Kerfin7-NEA-2129.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import LoginIcon from '@mui/icons-material/Login';
