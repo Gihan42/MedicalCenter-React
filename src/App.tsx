@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Content from './components/Content/Content';
+import Login from './Pages/Login/Login';
 import Header from './components/Header/Header';
-import Login from './components/Pages/Login/Login';
 // import { Login } from '@mui/icons-material';
 
 export default class App extends Component  {
@@ -13,7 +14,9 @@ export default class App extends Component  {
   render(): React.ReactNode {
     return (
       <div className='bg-stone-300 min-h-screen	'>
-          <Login/>      
+         <Content/>
+         {/* <Login/> */}
+         {/* <Header/> */}
       </div>
     );
   }

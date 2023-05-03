@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default class Header extends Component {
   render() {
@@ -8,16 +9,17 @@ export default class Header extends Component {
         <div className=' w-full h-full	'>
             <div className='flex w-full h-full items-center'>
                 <div className='w-1/2'>
-                    <div className='font-Poppins font-bold text-slate-300 text-2xl	'>My feed.com</div>
+                    <div className='font-Poppins font-bold text-slate-300 text-2xl	'>Araliya Medical-Center</div>
                 </div>
                 <div className='w-1/2'>
                     <div className='flex w-full justify-end gap-12 '>
                       
                         <NavLink to={"/home"} className= 'cursor-pointer text-slate-300 pr-0'>Home</NavLink>
-                        <NavLink to={"/about"} className='text-slate-300 '>About</NavLink>
+                        <NavLink to={"/chanelling"} className='text-slate-300 '>Chanelling</NavLink>
+                        <NavLink to={"/doctors"} className='text-slate-300 '>Doctors</NavLink>
                         <NavLink to={"/contact"} className='text-slate-300 '>Contact</NavLink>
-                        <NavLink to={"/profile"} className='text-slate-300 '>Profile</NavLink>
-                    
+                        <NavLink to={"/"} className='text-slate-300 '><LogoutIcon/></NavLink>
+
 
                     </div>
 
