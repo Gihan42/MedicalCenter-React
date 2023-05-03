@@ -1,23 +1,45 @@
-import React, { Component } from 'react'
+import React, { Component, FormEvent } from 'react'
 import backgroundImage from '../../../assets/medium-shot-doctors-wearing-protective-equipment.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import LoginIcon from '@mui/icons-material/Login';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import BloodtypeIcon from '@mui/icons-material/Bloodtype';
+/////////////
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Copyright } from '@mui/icons-material';
+
+const theme = createTheme();
 
 export default class Login extends Component {
   render() {
+    function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+      throw new Error('Function not implemented.');
+    }
+
     return (
       <>
-        <div className='h-screen bg-cover flex justify-center items-center' style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <div className='border-2 border-gray-500  w-1/2 h-96 rounded-3xl shadow-gray-500 shadow-lg hover:drop-shadow-xl backdrop-blur-sm '>
+        <div className='h-screen bg-cover  'style={{ backgroundImage: `url(${backgroundImage})`}}>
+            <div className='pt-44'><h1 className='text-6xl text-sky-900'>Araliya Medical Center</h1></div>
+            <div className=' flex justify-center items-center '>
+            <div className='border-2 border-gray-500  w-1/2 h-96 rounded-3xl shadow-gray-500 shadow-lg hover:drop-shadow-xl backdrop-blur-sm mt-20 '>
                <div className='flex justify-center space-x-5 pt-10'>
                 <h2 className='text-4xl mb-0'> INTENSIFYING <span>  </span></h2> <h2 className='text-4xl mb-0'> LIFE <span>  </span></h2><h2 className='text-4xl mb-0'> AND </h2><h2 className='text-4xl mb-0'>CARE</h2>
             </div>
               <div className=' mt-20 space-x-10 flex justify-center '>
-            <button type="button" className="btn btn-outline-danger h-16 w-48 space-x-5 shadow-lg p-3 mb-5  rounded"><span> Login</span> <LoginIcon/></button>
-            <button type="button" className="btn btn-outline-success h-16 w-48 space-x-5 shadow-lg p-3 mb-5  rounded"><span>Register</span><ManageAccountsIcon/> </button>
+            <button type="button" className="btn btn-outline-danger h-16 w-48 space-x-5 shadow-lg p-3 mb-5  rounded" data-bs-toggle="modal"  data-bs-target="#exampleModalToggle"><span> Login</span> <LoginIcon/></button>
+            <button type="button" className="btn btn-outline-success h-16 w-48 space-x-5 shadow-lg p-3 mb-5  rounded" data-bs-toggle="modal"  data-bs-target="#exampleModalToggle1"><span>Register</span><ManageAccountsIcon/> </button>
             </div>
             <div className=' mt-7 space-x-10 flex justify-center '>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-facebook" viewBox="0 0 16 16">
@@ -31,9 +53,89 @@ export default class Login extends Component {
             </svg>
             </div>
             </div>
+            </div>
         </div>
-       </>
+        <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel">
+            <div className="modal-dialog modal-dialog-centered " >
+            <div className=" backdrop-blur-3xl border-2 border-white rounded-3xl text-white" id="exampleModalToggleDiv">
+                <div className='h-96  w-96  justify-center items-center'>
+                      
+                      <form action="">
 
+                      <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+          </Box>
+        </Box>
+        
+      </Container>
+    </ThemeProvider>
+
+
+
+
+                      </form>
+                </div>
+            </div>
+            </div>
+            </div>
+            <div className="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel">
+            <div className="modal-dialog modal-dialog-centered " >
+            <div className="backdrop-blur-3xl border-2 border-white rounded-3xl text-white" id="exampleModalToggleDiv">
+                <div className='h-96  w-96 rounded-3xl justify-center items-center'>
+                      <h1>Register</h1>
+                </div>
+            </div>
+            </div>
+            </div>
+       </>
     )
   }
 }
