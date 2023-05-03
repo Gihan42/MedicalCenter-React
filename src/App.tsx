@@ -15,8 +15,8 @@ export default class App extends Component  {
   render(): React.ReactNode {
     return (
       <div className='bg-stone-300 min-h-screen	'>
-         {/* <Content/> */}
-       <Home/>
+         <Content/>
+       {/* <Home/> */}
 
       </div>
     );
