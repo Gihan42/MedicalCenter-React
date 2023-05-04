@@ -36,7 +36,7 @@ export default class Login extends Component {
         <div className='h-screen bg-cover  'style={{ backgroundImage: `url(${backgroundImage})`}}>
             <Title/>
             <div className=' flex justify-center items-center '>
-            <div className='border-2 border-gray-500  w-1/2 h-96 rounded-3xl shadow-black shadow-2xl hover:drop-shadow-xl backdrop-blur-sm mt-20 '>
+            <div className='border-2 border-gray-500  w-1/2 h-96 rounded-3xl shadow-black shadow-2xl hover:drop-shadow-xl backdrop-blur-3xl mt-20 '>
                <div className='flex justify-center space-x-5 pt-10'>
                 <h2 className='text-4xl mb-0'> INTENSIFYING <span>  </span></h2> <h2 className='text-4xl mb-0'> LIFE <span>  </span></h2><h2 className='text-4xl mb-0'> AND </h2><h2 className='text-4xl mb-0'>CARE</h2>
             </div>
