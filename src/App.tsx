@@ -5,6 +5,7 @@ import Login from './Pages/Login/Login';
 import Header from './components/Header/Header';
 import Home from './Pages/Home/Home';
 import Contact from './Pages/Contact/Contact';
+import Channeling from './Pages/Channeling/Channeling';
 // import { Login } from '@mui/icons-material';
 
 export default class App extends Component  {
@@ -16,9 +17,10 @@ export default class App extends Component  {
   render(): React.ReactNode {
     return (
       <div className='bg-stone-300 min-h-screen	'>
-         <Content/>
+         {/* <Content/> */}
        {/* <Home/> */}
          {/* <Contact/> */}
+         <Channeling/>
       </div>
     );
   }
