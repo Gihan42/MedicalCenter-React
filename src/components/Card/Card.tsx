@@ -28,7 +28,9 @@ export default class Card extends Component {
                 <div className='flex justify-start items-start'>
                 <h2 className='text-lg text-slate-900'>Karapitiya General Hospital</h2>
                 </div>
-
+                <div className='flex justify-start items-start'>
+                <h2 className='text-lg text-slate-900'>Karapitiya General Hospital</h2>
+                </div>
               </div>
 
           </div>
