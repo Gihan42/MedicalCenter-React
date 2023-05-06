@@ -16,9 +16,8 @@ import nine from '../../assets/image/9.jpg'
 import ten from '../../assets/image/10.jpg'
 import eleven from '../../assets/image/11.jpg'
 import twelve from '../../assets/image/12.jpg'
-import thirteen from '../../assets/image/national-cancer-institute-701-FJcjLAQ-unsplash.jpg'
 import Button from '@mui/material/Button/Button';
-
+import background from '../../assets/24590.jpg'
 import visa from '../../assets/image/visa.png'
 import masterd from '../../assets/image/atm-card.png'
 import amex from '../../assets/image/american-express.png'
@@ -30,7 +29,7 @@ export default class Channeling extends Component {
     return (
       <>
       <Header/>
-      <div className='pb-20 bg-cover h-screen' style={{ backgroundImage: `url(${''})`}}>
+      <div className='pb-20 bg-cover h-screen' style={{ backgroundImage: `url(${background})`}}>
          <div className='flex justify-center items-center pt-24'><h1 className='text-5xl'>Channel Your Doctor</h1> </div>
       <div className='grid grid-cols-3 gap-3 pr-20 pl-20 p-3 w-auto'>
         <section className=' w-auto'>
