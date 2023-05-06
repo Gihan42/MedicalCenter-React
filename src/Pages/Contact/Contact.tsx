@@ -5,13 +5,14 @@ import TextField from '@mui/material/TextField';
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
+import bgIMage from '../../assets/v915-techi-020.jpg'
 
 export default class Contact extends Component {
   render() {
     return (
       <>
         <Header/>
-            <div className='pb-20 bg-gradient-to-r from-blue-500 h-screen'>
+            <div className='pb-20 bg-cover h-screen' style={{ backgroundImage: `url(${bgIMage})`}}>
             
               <div className="grid grid-cols-2 gap-4 p-28  h-screen ">
                 <div className="  space-y-5 justify-center ">

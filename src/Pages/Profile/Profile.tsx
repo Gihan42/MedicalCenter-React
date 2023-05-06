@@ -5,22 +5,84 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import TextField, { FilledTextFieldProps, OutlinedTextFieldProps, StandardTextFieldProps, TextFieldVariants } from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button/Button';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+import  bgImage from '../../assets/rm222batch2-mind-03.jpg';
 
 export default class Profile extends Component {
   render() {
     return (
         <>
         <Header/>
-        <div className='h-screen   bg-cover ' style={{ backgroundImage: `url(${''})`}}>
-          <div className='p-14 w-full'>
+        <div className='h-screen    bg-cover ' style={{ backgroundImage: `url(${bgImage})`}}>
+          <div className='pr-14 pt-16 pl-14 w-full'>
           <div className="grid grid-cols-2 gap-4 p-10  h-auto ">
-          <div className=" p-4 w-auto space-y-5 border-2 border-black ">
-              coloumn 01
+          <div className="  w-auto space-y-5  ">
+              
+              <section className='justify-center items-center'>
+                <div className='flex justify-start space-x-8 mb-4'>
+                    <h1 className='text-2xl mt-3 ml-4'>Enter Your Email Address</h1><TextField id="email" 
+                               sx={{width:290}}  
+                    label="Email Address "autoComplete="email" variant="outlined" />
+                    <button type="button" className="btn btn-primary space-x-4">Search <SearchIcon/></button>
+                </div>
+                <div className='justify-center border-2 border-abc-100 mt-1 rounded-2xl pt-4 pb-3 bg-transparent backdrop-blur-3xl pl-8 shadow-2xl shadow-black'>
+                    <h1 className='text-green-700'>Your  Appoinment</h1>
+                <div className='flex justify-start space-x-8 mt-3'> 
+                    <h1 className='text-3xl text-sky-900 '>Appointment No</h1><h2 className='text-3xl'>A001</h2>
+                </div>
+                <div className='flex justify-start space-x-8 mt-3'> 
+                    <h1 className='text-3xl text-sky-900 '>Doctor Name</h1>
+                     <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
+                    <option selected>Doctor Name</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div className='flex justify-start space-x-8 mt-2'> 
+                    <h1 className='text-3xl text-sky-900 mt-2 '>Appointment Date</h1><TextField id="standard-basic" label=" " variant="standard" type='date' 
+                      sx={{width:235,fontSize:20}} 
+                    />
+                </div>
+                <div className='flex justify-start space-x-8 mt-3'> 
+                    <h1 className='text-3xl text-sky-900 '>Your Payment </h1> <h2 className='text-3xl'>5000,00</h2>
+                </div>
+                <div className='flex justify-start space-x-8 mt-3'> 
+                    <h1 className='text-3xl text-sky-900 '>Wards No </h1> <h2 className='text-3xl'>02</h2>
+                    <Button variant="contained" color="success">Update</Button>
+                <Button variant="contained" color='error' startIcon={<DeleteIcon />}>Delete</Button>
+                </div>
+                </div>  
+                <div className='h-auto mt-3 p-2'>
+                <table className="table">
+                      <thead className="table-dark">
+                      <tr >
+                        <th scope="col">Appoinment No</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Wards No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"><DeleteIcon/></th>
+                      </tr>
+                     </thead>
+                      <tbody>
+                      <tr>
+                       <td>A001</td>
+                       <td>Dr P Darshana</td>
+                       <td>02</td>
+                       <td>2023/06/06</td>
+                       <td><CloseIcon/></td>
+                     </tr>
+
+                     </tbody>
+                    </table>
+                </div> 
+              </section>
           </div>
-          <div className=" p-4 space-y-5 border-2 border-red-400 ml-52  h-auto">
+          <div className=" p-4 space-y-5  ml-52  h-auto">
             <section className='grid grid-rows-2'>
 
-              <div className='flex justify-center items-center  border-2 border-green-600 h-auto'>
+              <div className='flex justify-center items-center   h-auto'>
                 <div className='flex justify-center items-center'>
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="188" height="188" fill="currentColor" className="bi bi-person-bounding-box shadow-2xl cursor-pointer hover:text-green-700" viewBox="0 0 16 16">
@@ -30,7 +92,7 @@ export default class Profile extends Component {
                  </div>
                  
               </div>
-              <div className=' justify-center items-center border-2 border-pink-600 pl-5 h-auto pt-5'>
+              <div className=' justify-center items-center  pl-5 h-auto pt-5'>
                 <form action="">
                 <h1 className='text-2xl'>Kamal Ruvindra</h1>
                 <div className='justify-start flex space-x-5'>
@@ -38,12 +100,6 @@ export default class Profile extends Component {
                 </div>
                 <div className='justify-start flex space-x-5'>
                   <h2 className='text-xl mt-3'> Patien Email:- </h2><TextField id="email" label="Email Address " autoComplete="email" variant="standard" />
-                  {/* <select className="form-select form-select-sm pl-10 pr-12 bg-transparent h-10 mt-3 w-auto " aria-label=".form-select-sm example">
-                    <option selected>Doctor Name</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select> */}
                 </div>
                 <div className='justify-start flex space-x-5'>
                   <h2 className='text-xl mt-3'>Password :- </h2><TextField id="standard-basic" label="Password "  variant="standard" />
