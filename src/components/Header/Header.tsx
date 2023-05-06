@@ -19,7 +19,7 @@ export default class Header extends Component {
                     <div className='flex w-full justify-end gap-12 text-3xl text-slate-900 font-bold '>
                       
                         <NavLink to={"/home"} className={({isActive})=>(isActive? navStyles:"font-bold  decoration-transparent")}>Home</NavLink>
-                        <NavLink to={"/chanelling"} className={({isActive})=>(isActive? navStyles:"font-bold  decoration-transparent ")}>Channeling</NavLink>
+                        <NavLink to={"/chanelling"} className={({isActive})=>(isActive? navStyles:"font-bold  decoration-transparent ")}>Channelling</NavLink>
                         <NavLink to={"/doctors"} className={({isActive})=>(isActive? navStyles:'font-bold  decoration-transparent')}>Doctors</NavLink>
                         <NavLink to={"/contact"} className={({isActive})=>(isActive? navStyles:'font-bold  decoration-transparent')}>Contact</NavLink>
                         <NavLink to={"/profile"} className={({isActive})=>(isActive? navStyles:'font-bold  decoration-transparent ')}>Profile</NavLink>
@@ -29,7 +29,7 @@ export default class Header extends Component {
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     )
   }
 }

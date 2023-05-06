@@ -21,7 +21,7 @@ export default class Profile extends Component {
               
               <section className='justify-center items-center'>
                 <div className='flex justify-start space-x-8 mb-4'>
-                    <h1 className='text-2xl mt-3 ml-4'>Enter Your Email Address</h1><TextField id="email" 
+                    <h1 className='text-3xl mt-3 ml-4 font-bold'>Enter Your Email Address</h1><TextField id="email" 
                                sx={{width:290}}  
                     label="Email Address "autoComplete="email" variant="outlined" />
                     <button type="button" className="btn btn-primary space-x-4">Search <SearchIcon/></button>
@@ -34,10 +34,13 @@ export default class Profile extends Component {
                 <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-3xl text-sky-900 '>Doctor Name</h1>
                      <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
+                    <option selected>Specialization</option>
+                    <option value="1">Doctors</option>
+                    <option value="2">Hospital</option>
+                  </select>
+                  <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
                     <option selected>Doctor Name</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    
                   </select>
                 </div>
                 <div className='flex justify-start space-x-8 mt-2'> 
