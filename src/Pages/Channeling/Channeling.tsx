@@ -165,11 +165,8 @@ export default class Channeling extends Component {
     <div/>
     </div>
   </div>
-  
 </div>
           </section>
-  
-
       </div>
     
 
