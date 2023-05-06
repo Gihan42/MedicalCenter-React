@@ -4,6 +4,23 @@ import TextField from '@mui/material/TextField'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import SearchIcon from '@mui/icons-material/Search';
+import one from '../../assets/image/national-cancer-institute-1c8sj2IO2I4-unsplash.jpg'
+import two from '../../assets/image/martha-dominguez-de-gouveia-KF-h9HMxRKg-unsplash.jpg'
+import three from '../../assets/image/martha-dominguez-de-gouveia-nMyM7fxpokE-unsplash.jpg'
+import four from '../../assets/image/empty-hospital-room-with-nobody-it-having-single-bed.jpg'
+import five from '../../assets/image/national-cancer-institute-701-FJcjLAQ-unsplash.jpg'
+import six from '../../assets/image/pexels-zakir-rushanly-11748826.jpg'
+import seven from '../../assets/image/7.jpg'
+import eight from '../../assets/image/8.jpg'
+import nine from '../../assets/image/9.jpg'
+import ten from '../../assets/image/10.jpg'
+import eleven from '../../assets/image/11.jpg'
+import twelve from '../../assets/image/12.jpg'
+import thirteen from '../../assets/image/national-cancer-institute-701-FJcjLAQ-unsplash.jpg'
+
+
+
+
 
 export default class Channeling extends Component {
   render() {
@@ -60,7 +77,7 @@ export default class Channeling extends Component {
                     <h1 className='text-2xl text-sky-900 '>Doctor Chargers</h1><h1 className='text-2xl '>2500.00</h1>
             </div>
             <div className='flex justify-start space-x-8 mt-3'> 
-                    <h1 className='text-2xl text-sky-900 '>Word No</h1><h1 className='text-2xl '>02</h1>
+                    <h1 className='text-2xl text-sky-900 '>Wards No</h1><h1 className='text-2xl '>02</h1>
             </div>
             <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-2xl text-sky-900 '>Time</h1><h1 className='text-2xl '>4.00 p.m</h1>
@@ -77,6 +94,62 @@ export default class Channeling extends Component {
           column-3
         </section>
       </div>
+          <section className='pl-28 pr-28 mt-3'>
+          <div id="carouselExampleInterval" className="carousel slide border-2 border-black h-80 " data-bs-ride="carousel">
+  <div className="carousel-inner">
+    <div className="carousel-item active " data-bs-interval="10000">
+    
+      <div className='grid grid-cols-5   w-auto'>
+          <section className='bg-cover h-80' style={{ backgroundImage: `url(${one})`}}>
+            
+          </section>
+          <section className='bg-cover' style={{ backgroundImage: `url(${two})`}}>
+            
+          </section>
+          <section className='bg-cover' style={{ backgroundImage: `url(${three})`}}>
+            
+          </section>
+          <section className='bg-cover' style={{ backgroundImage: `url(${four})`}}>
+            
+          </section>
+          <section className='bg-cover' style={{ backgroundImage: `url(${five})`}}>
+            
+          </section>
+
+      </div>
+    </div>
+    <div className="carousel-item " data-bs-interval="2000">
+      <div className='grid grid-cols-3   w-auto'>
+           <section className='bg-cover h-80' style={{ backgroundImage: `url(${six})`}}>
+           </section>
+           <section className='bg-cover h-80' style={{ backgroundImage: `url(${seven})`}}>
+           </section>
+           <section className='bg-cover h-80' style={{ backgroundImage: `url(${eight})`}}>
+           </section>
+    </div>
+    </div>
+    <div className="carousel-item ">
+    <div className='grid grid-cols-4   w-auto'>
+          <section className='bg-cover h-80' style={{ backgroundImage: `url(${nine})`}}></section>
+          <section className='bg-cover h-80' style={{ backgroundImage: `url(${ten})`}}></section>
+          <section className='bg-cover h-80' style={{ backgroundImage: `url(${eleven})`}}></section>
+          <section className='bg-cover h-80' style={{ backgroundImage: `url(${twelve})`}}></section>
+     </div>
+    <div/>
+    </div>
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon " aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>
+          </section>
+  
+
       </div>
     
 
