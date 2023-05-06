@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
-
+ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 export default class Header extends Component {
   render() {
     const navStyles="text-slate-900";
@@ -20,7 +20,8 @@ export default class Header extends Component {
                         <NavLink to={"/chanelling"} className={({isActive})=>(isActive? navStyles:"text-slate-900 decoration-transparent ")}>Chanelling</NavLink>
                         <NavLink to={"/doctors"} className={({isActive})=>(isActive? navStyles:'text-slate-900 decoration-transparent')}>Doctors</NavLink>
                         <NavLink to={"/contact"} className={({isActive})=>(isActive? navStyles:'text-slate-900 decoration-transparent')}>Contact</NavLink>
-                        <NavLink to={"/"} className={({isActive})=>(isActive? navStyles:'text-slate-900 decoration-transparent')}><LogoutIcon/></NavLink>
+                        <NavLink to={"/profile"} className={({isActive})=>(isActive? navStyles:'text-slate-900 decoration-transparent ')}>Profile</NavLink>
+                        <NavLink to={"/"} className={({isActive})=>(isActive? navStyles:'text-slate-900 decoration-transparent ')}><LogoutIcon/></NavLink>
 
                     </div>
                 </div>
