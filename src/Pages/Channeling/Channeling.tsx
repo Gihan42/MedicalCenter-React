@@ -17,8 +17,11 @@ import ten from '../../assets/image/10.jpg'
 import eleven from '../../assets/image/11.jpg'
 import twelve from '../../assets/image/12.jpg'
 import thirteen from '../../assets/image/national-cancer-institute-701-FJcjLAQ-unsplash.jpg'
+import Button from '@mui/material/Button/Button';
 
-
+import visa from '../../assets/image/visa.png'
+import masterd from '../../assets/image/atm-card.png'
+import amex from '../../assets/image/american-express.png'
 
 
 
@@ -30,9 +33,9 @@ export default class Channeling extends Component {
       <div className='pb-20 bg-cover h-screen' style={{ backgroundImage: `url(${''})`}}>
          <div className='flex justify-center items-center pt-24'><h1 className='text-5xl'>Channel Your Doctor</h1> </div>
       <div className='grid grid-cols-3 gap-3 pr-20 pl-20 p-3 w-auto'>
-        <section className='border-2 border-red-300 w-auto'>
-          column 01
-          <div className=' border-2 border-gray-700 pl-5 rounded-3xl backdrop-blur-3xl bg-transparent pr-5 pt-3  shadow-2xl shadow-black'>
+        <section className=' w-auto'>
+          {/* column 01 */}
+          <div className=' border-2 border-gray-700 pl-5 rounded-3xl backdrop-blur-3xl bg-transparent pr-5 pt-3 pb-2 shadow-2xl shadow-black'>
             <form action="">
             <div className='justify-start flex space-x-5 '>
                   <h2 className='text-2xl mt-3 text-sky-900 '>Enter Your Email :- </h2><TextField id="email" label="email " type='email'  autoComplete="email" variant="standard" />
@@ -58,9 +61,9 @@ export default class Channeling extends Component {
           </div>
 
         </section>
-        <section className='border-2 border-black w-auto'>
-          column-2
-          < div className=' border-2 border-gray-700 pl-5 rounded-3xl  bg-transparent pr-5 pt-3  shadow-2xl shadow-black '>
+        <section className=''>
+           {/* column 02 */}
+          < div className=' border-2 border-gray-700 pl-5 rounded-3xl backdrop-blur-3xl bg-transparent pr-5 pt-3  shadow-2xl shadow-black '>
             <form action="">
             <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-2xl text-sky-900 mt-2'>Doctor Name</h1>
@@ -85,19 +88,44 @@ export default class Channeling extends Component {
             <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-2xl text-sky-900 '>Hospital</h1><h1 className='text-2xl '>Matarat General Hospital</h1>
             </div>
-
+            <Button
+            
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1, mb: 2 ,backgroundColor:'#283747'}}
+          >
+            Conform 
+          </Button>
             </form>
           </div>
 
         </section>
-        <section className='border-2 border-green-500'>
-          column-3
+        <section className=''>
+        < div className=' border-2 border-gray-700 pl-5 rounded-3xl backdrop-blur-3xl bg-transparent pr-2 pt-3  shadow-2xl shadow-black '>
+
+          <div className='grid grid-rows-2   w-auto'>
+            <h1 className='text-green-800 mb-7'>Payment</h1>
+            <div className='flex justify-start space-x-4 pb-3'>
+           <button type="button" className="btn btn-danger">Blood Testing :- Rs 4000.00</button>
+           <button type="button" className="btn btn-primary">X - Ray :- Rs 3500.00</button>
+           <button type="button" className="btn btn-secondary">Scan :- Rs 2500.00</button>
+            </div>
+          <div className='flex justify-start'><h1 className='text-2xl text-sky-900 '>Your Bill : Rs </h1><h1 className='text-2xl'>7000.00</h1></div>
+          <div className='flex justify-start space-x-9 '><h1 className='text-2xl text-sky-900 gap-5 space-x-5 mr-5 mt-2'> Payment Method </h1>
+          
+          <div className='bg-cover w-10 border-2 border-transparent h-10 pr-5 hover:border-red-500 cursor-pointer' style={{ backgroundImage: `url(${visa})`}}></div><div className='bg-cover w-10  p-3 border-2 border-transparent h-10 pr-5 hover:border-red-500 cursor-pointer'style={{ backgroundImage: `url(${amex})`}}></div><div className='bg-cover w-10 h-10 border-transparent border-2 cursor-pointer pr-5 hover:border-red-500'style={{ backgroundImage: `url(${masterd})`}}></div>
+          </div>
+          <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Your Payment : Rs </h1><h1 className='text-2xl'>8000.00</h1></div>
+          <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Balance : Rs </h1><h1 className='text-2xl'>1000.00</h1></div>
+
+          </div>
+          </div>
         </section>
       </div>
           <section className='pl-28 pr-28 mt-3'>
-          <div id="carouselExampleInterval" className="carousel slide border-2 border-black h-80 " data-bs-ride="carousel">
+          <div id="carouselExampleInterval" className="carousel slide border-2 border-cyan-900 h-80 " data-bs-ride="carousel">
   <div className="carousel-inner">
-    <div className="carousel-item active " data-bs-interval="10000">
+    <div className="carousel-item active " data-bs-interval="5000">
     
       <div className='grid grid-cols-5   w-auto'>
           <section className='bg-cover h-80' style={{ backgroundImage: `url(${one})`}}>
@@ -118,7 +146,7 @@ export default class Channeling extends Component {
 
       </div>
     </div>
-    <div className="carousel-item " data-bs-interval="2000">
+    <div className="carousel-item " data-bs-interval="5000">
       <div className='grid grid-cols-3   w-auto'>
            <section className='bg-cover h-80' style={{ backgroundImage: `url(${six})`}}>
            </section>
@@ -128,7 +156,7 @@ export default class Channeling extends Component {
            </section>
     </div>
     </div>
-    <div className="carousel-item ">
+    <div className="carousel-item " data-bs-interval="5000">
     <div className='grid grid-cols-4   w-auto'>
           <section className='bg-cover h-80' style={{ backgroundImage: `url(${nine})`}}></section>
           <section className='bg-cover h-80' style={{ backgroundImage: `url(${ten})`}}></section>
@@ -138,14 +166,7 @@ export default class Channeling extends Component {
     <div/>
     </div>
   </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon " aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
+  
 </div>
           </section>
   
