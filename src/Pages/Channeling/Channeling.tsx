@@ -114,8 +114,9 @@ export default class Channeling extends Component {
           
           <div className='bg-cover w-10 border-2 border-transparent h-10 pr-5 hover:border-red-500 cursor-pointer' style={{ backgroundImage: `url(${visa})`}}></div><div className='bg-cover w-10  p-3 border-2 border-transparent h-10 pr-5 hover:border-red-500 cursor-pointer'style={{ backgroundImage: `url(${amex})`}}></div><div className='bg-cover w-10 h-10 border-transparent border-2 cursor-pointer pr-5 hover:border-red-500'style={{ backgroundImage: `url(${masterd})`}}></div>
           </div>
-          <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Your Payment : Rs </h1><h1 className='text-2xl'>8000.00</h1></div>
-          <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Balance : Rs </h1><h1 className='text-2xl'>1000.00</h1></div>
+          <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900 mb-0 '>Your Payment : Rs </h1><h1 className='text-2xl'>8000.00</h1></div>
+          <div className='flex justify-start '><h1 className='text-2xl text-sky-900  mr-4 mt-3'>Payment Date :</h1><TextField id="standard-basic" label=" " variant="standard" type='date'/>
+            </div>
           </div>
           </div>
         </section>
