@@ -116,7 +116,6 @@ export default class Channeling extends Component {
           </div>
           <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Your Payment : Rs </h1><h1 className='text-2xl'>8000.00</h1></div>
           <div className='flex justify-start mt-3'><h1 className='text-2xl text-sky-900  '>Balance : Rs </h1><h1 className='text-2xl'>1000.00</h1></div>
-
           </div>
           </div>
         </section>
