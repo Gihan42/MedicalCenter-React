@@ -1,12 +1,86 @@
-import React, { Component } from 'react'
+import React, { ChangeEvent, Component } from 'react'
 import Header from '../../components/Header/Header'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import bgImage from '../../assets/26357.jpg'
 import Card from '../../components/Card/Card';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import axios from "axios";
 
-export default class Doctors extends Component {
+
+type DoctorDetails = {
+  DId: string;
+  DName: string;
+  position: string;
+  time:string;
+  contact:string;
+  DCharge:number;
+};
+type DoctorProps = {};
+type DoctorState = {
+  DoctorDetails: DoctorDetails[];
+  DId: string;
+  DName: string;
+  position: string;
+  time:string;
+  contact:string;
+  DCharge:number;
+  wardNo:number;
+};
+export default class Doctors extends Component <DoctorProps,DoctorState>{
+
+  constructor(props :DoctorProps){
+    super(props);
+    this.state = {
+      DoctorDetails: [],
+      DId: "",
+      DName: "",
+      position: "",
+      time:"",
+      contact:"",
+      DCharge:0,
+      wardNo:0
+    };
+  }
+
+
+  handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = event.target;
+    const inputValue =type == "number"?parseInt(value):value;
+
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  componentDidMount(): void {
+    //this.handleInput();
+  }
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { DId, DName, position , time , contact , DCharge , wardNo} = this.state;
+    let newDoctor = {
+      DId: DId,
+      DName: DName,
+      position: position,
+      time:time,
+      contact:contact,
+      DCharge:DCharge,
+      wardNo:wardNo
+    };
+    axios.post("http://localhost:5000/api/v1/doctor", newDoctor).then((res) => {
+      // this.setState((prevState)=>({
+      //     PatientList:[...prevState.PatientList, res.data.responseData]
+      // }));
+     
+      console.log(res);
+      
+    }).catch((error)=>{});
+  }
+
+  
   render() {
     return (
         <>
@@ -67,16 +141,98 @@ export default class Doctors extends Component {
 </div>
 </div>
 </div>
-
-
       <div className="modal fade p-40" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel">
-            <div className=" modal-dialog modal-dialog-centered backdrop-blur-3xl border-2  border-white rounded-3xl text-white "  id="exampleModalToggleDiv">
-                <div className='modal-content  h-72 w-56 justify-center items-center rounded-3xl bg-transparent   text-emerald-50'>
+            <div className=" modal-dialog modal-dialog-centered  h-80 bg-white border-2  border-white rounded-3xl text-white "  id="exampleModalToggleDiv">
+                <div className='modal-content p-5 h-80 w-56 justify-center items-center rounded-3xl bg-transparent   text-emerald-50'>
                                          
-                                         <div><h1>Add Doctor</h1></div>
-                                        <form action="">
-            
-                                        </form>
+                        <form onSubmit={this.handleSubmit}>
+                          <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="DId"
+                          label="Doctor Id"
+                          name="DId"
+                          autoFocus
+                          type="text"
+                          value={this.state.DId}
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="text"
+                          label="Doctor Name"
+                          name="DName"
+                          autoFocus
+                          value={this.state.DName}
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="position"
+                          label="position"
+                          type="text"
+                          id="position"
+                          value={this.state.position}
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="time"
+                          label="Time"
+                          type="text"
+                          id="time"
+                          value={this.state.time}
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="contact"
+                          label="contact"
+                          type="text"
+                          id="contact"
+                          value={this.state.contact}
+                          onChange={this.handleInput}
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="DCharge"
+                          label="DCharge"
+                          type="number"
+                          id="DCharge"
+                          value={this.state.DCharge}
+                          onChange={this.handleInput}
+                        />
+                           <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="wardNo"
+                          label="WardNo"
+                          type="number"
+                          id="WardNo"
+                          value={this.state.wardNo}
+                          onChange={this.handleInput}
+                        />
+                        <Button
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          sx={{ mt: 1, mb: 2 }}
+                        >
+                          Register
+                        </Button>
+                      </form>
                 </div>
             </div>
             </div>

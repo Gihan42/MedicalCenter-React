@@ -9,7 +9,30 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import  bgImage from '../../assets/rm222batch2-mind-03.jpg';
 
-export default class Profile extends Component {
+
+type PatientDetails = {
+  email: string;
+  userName: string;
+  password: string;
+};
+type PatientProps = {};
+type PatientState = {
+  PatientList: PatientDetails[];
+  email: string;
+  userName: string;
+  password: string;
+};
+
+export default class Profile extends Component <PatientProps, PatientState> {
+  constructor(props: PatientProps) {
+    super(props);
+    this.state = {
+      PatientList: [],
+      email: "",
+      userName: "",
+      password: "",
+    };
+  }
   render() {
     return (
         <>
