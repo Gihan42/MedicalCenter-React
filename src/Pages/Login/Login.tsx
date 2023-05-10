@@ -20,7 +20,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Title from "../../components/Title/Title";
-import axios from "../../axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 const theme = createTheme();
 
@@ -69,10 +69,13 @@ export default class Login extends Component<PatientProps, PatientState> {
       userName: userName,
       password: password,
     };
-    axios.post("patient", newPatient).then((res) => {
+    axios.post("http://localhost:5000/api/v1/patient", newPatient).then((res) => {
       // this.setState((prevState)=>({
       //     PatientList:[...prevState.PatientList, res.data.responseData]
       // }));
+      if(res.status==200){
+        window.location.href = "http://localhost:3000/home"
+      }
       console.log(res);
       
     }).catch((error)=>{});
@@ -248,9 +251,7 @@ export default class Login extends Component<PatientProps, PatientState> {
                 <h1>Register</h1>
               </div>
               <form onSubmit={this.handleSubmit} className="text-white">
-                <ThemeProvider theme={theme}>
-                  <Container component="main" maxWidth="xs">
-                    <Box
+                    {/* <Box
                       sx={{
                         marginTop: 0,
                         display: "flex",
@@ -264,7 +265,7 @@ export default class Login extends Component<PatientProps, PatientState> {
                         onSubmit={handleSubmit}
                         noValidate
                         sx={{ mt: 1 }}
-                      >
+                      > */}
                         <TextField
                           margin="normal"
                           required
@@ -314,10 +315,10 @@ export default class Login extends Component<PatientProps, PatientState> {
                           Register
                         </Button>
                         {/* </Link> */}
-                      </Box>
+                      {/* </Box>
                     </Box>
                   </Container>
-                </ThemeProvider>
+                </ThemeProvider> */}
               </form>
             </div>
           </div>
