@@ -21,10 +21,51 @@ import background from '../../assets/24590.jpg'
 import visa from '../../assets/image/visa.png'
 import masterd from '../../assets/image/atm-card.png'
 import amex from '../../assets/image/american-express.png'
+import axios from '../../axios';
+import Doctors from '../Doctors/Doctors';
 
+type DoctorDetails = {
+  DId: string;
+  DName: string;
+  position: string;
+  time:string;
+  contact:string;
+  DCharge:number;
+  wardNo:number;
+};
+type DoctorProps = {};
+type DoctorState = {
+  DoctorList: DoctorDetails[];
+  // DId: string;
+  // DName: string;
+  // position: string;
+  // time:string;
+  // contact:string;
+  // DCharge:number;
+  // wardNo:number;
+};
 
+export default class Channeling extends Component <DoctorProps,DoctorState>{
 
-export default class Channeling extends Component {
+constructor (props:DoctorProps){
+    super(props) ;
+    this.state = {
+      DoctorList:[],
+    };
+}
+ componentDidMount(): void {
+  this.getAllDoctors()
+ }
+
+  getAllDoctors = ()=>{
+      axios.get("doctor").then((res)=>{
+        console.log(res.data.responseData);
+        this.setState((prevState)=>({
+          ...prevState,
+          DoctorList:res.data.responseData,
+        }))
+      });
+  }
   render() {
     return (
       <>
@@ -72,7 +113,12 @@ export default class Channeling extends Component {
                     <option value="2">Hospital</option>
                   </select>
                   <select className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    <option selected>Doctor Name</option>
+                    <option selected>
+                      {/* {this.state.DoctorList.map((doctor)=>(
+
+                      ))}
+                      <Doctors DId="" DName="" position="" time="" contact="" DCharge={0} wardNo={0}/> */}
+                    </option>
                   </select>
                 </div>
             <div className='flex justify-start space-x-8 mt-3'> 
