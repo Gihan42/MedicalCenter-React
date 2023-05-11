@@ -8,30 +8,59 @@ import Button from '@mui/material/Button/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import  bgImage from '../../assets/rm222batch2-mind-03.jpg';
+import axios from '../../axios';
 
 
-type PatientDetails = {
-  email: string;
-  userName: string;
-  password: string;
+type DoctorDetails = {
+  DId: string;
+  DName: string;
+  position: string;
+  time:string;
+  contact:string;
+  DCharge:number;
+  wardNo:number;
 };
-type PatientProps = {};
-type PatientState = {
-  PatientList: PatientDetails[];
-  email: string;
-  userName: string;
-  password: string;
+type DoctorProps = {};
+type DoctorState = {
+  DoctorList: DoctorDetails[];
+  // DId: string;
+  // DName: string;
+  // position: string;
+  // time:string;
+  // contact:string;
+  // DCharge:number;
+  // wardNo:number;
 };
 
-export default class Profile extends Component <PatientProps, PatientState> {
-  constructor(props: PatientProps) {
-    super(props);
+export default class Profile extends Component <DoctorProps, DoctorState> {
+  constructor (props:DoctorProps){
+    super(props) ;
     this.state = {
-      PatientList: [],
-      email: "",
-      userName: "",
-      password: "",
+      DoctorList:[],
     };
+}
+ componentDidMount(): void {
+     this.getAllDoctors()
+ }
+
+  getAllDoctors = ()=>{
+      axios.get("doctor").then((res)=>{
+        console.log(res.data.responseData);
+        this.setState((prevState)=>({
+          ...prevState,
+          DoctorList:res.data.responseData,
+        }))
+      });
+  }
+
+  load = (event:any)=>{
+    axios.get(`doctor/${event.target.value}`).then((res)=>{
+      console.log(res.data.responseData +"positions");
+      this.setState((prevState)=>({
+        ...prevState,
+        DoctorList:res.data.responseData, 
+      }))
+    });
   }
   render() {
     return (
@@ -56,13 +85,15 @@ export default class Profile extends Component <PatientProps, PatientState> {
                 </div>
                 <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-3xl text-sky-900 '>Doctor Name</h1>
-                     <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    <option selected>Specialization</option>
-                    <option value="1">Doctors</option>
-                    <option value="2">Hospital</option>
+                     <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example"onChange={this.load}>
+                    <option value={"Specialization"}>Specialization</option>
+                    <option value={"Doctor"}>Doctors</option>
+                    <option value={"Hospital"}>Hospital</option>
                   </select>
                   <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    <option selected>Doctor Name</option>
+                    {this.state.DoctorList.map((doctor)=>(
+                        <option value={doctor.DName}>{doctor.DName}</option>
+                      ))}
                     
                   </select>
                 </div>
