@@ -159,7 +159,8 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     aria-controls="home-tab-pane"
                     aria-selected="true"
                   >
-                    Specialization
+                    Doctors
+                    
                   </button>
                 </li>
                 <li
@@ -176,7 +177,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     aria-controls="profile-tab-pane"
                     aria-selected="false"
                   >
-                    Doctors
+                    Specialization
                   </button>
                 </li>
                 <li className="nav-item text-2xl font-bold" role="presentation">
