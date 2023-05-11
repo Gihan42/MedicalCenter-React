@@ -54,7 +54,7 @@ constructor (props:DoctorProps){
     };
 }
  componentDidMount(): void {
-  this.getAllDoctors()
+     this.getAllDoctors()
  }
 
   getAllDoctors = ()=>{
@@ -65,6 +65,16 @@ constructor (props:DoctorProps){
           DoctorList:res.data.responseData,
         }))
       });
+  }
+
+  load = (event:any)=>{
+    axios.get(`doctor/${event.target.value}`).then((res)=>{
+      console.log(res.data.responseData +"positions");
+      this.setState((prevState)=>({
+        ...prevState,
+        DoctorList:res.data.responseData, 
+      }))
+    });
   }
   render() {
     return (
@@ -107,18 +117,15 @@ constructor (props:DoctorProps){
             <form action="">
             <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-2xl text-sky-900 mt-2'>Doctor Name</h1>
-                     <select className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    <option selected>Specialization</option>
-                    <option value="1">Doctors</option>
-                    <option value="2">Hospital</option>
+                     <select className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example"  onChange={this.load}>
+                    <option value={"Specialization"}>Specialization</option>
+                    <option value={"Doctor"}>Doctors</option>
+                    <option value={"Hospital"}>Hospital</option>
                   </select>
                   <select className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    <option selected>
-                      {/* {this.state.DoctorList.map((doctor)=>(
-
+                     {this.state.DoctorList.map((doctor)=>(
+                        <option value={doctor.DName}>{doctor.DName}</option>
                       ))}
-                      <Doctors DId="" DName="" position="" time="" contact="" DCharge={0} wardNo={0}/> */}
-                    </option>
                   </select>
                 </div>
             <div className='flex justify-start space-x-8 mt-3'> 
