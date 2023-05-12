@@ -127,21 +127,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
           <div className="border-gray-400 p-10  w-5/6 border-2 backdrop-blur-3xl rounded-3xl shadow-2xl shadow-black">
             <div className="justify-center items-center flex">
               <h2 className="text-6xl text-green-700">Channel Your Doctor</h2>
-              <div className=" relative ml-20 left-80 bottom-12  flex justify-center text-red-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="34"
-                  fill="currentColor"
-                  className="bi bi-person-add cursor-pointer hover:text-green-700 "
-                  viewBox="0 0 16 16"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModalToggle"
-                >
-                  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                  <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
-                </svg>
-              </div>
+           
             </div>
             <div className="justify-center items-center flex">
               <ul className="nav nav-tabs" role="tablist">
@@ -269,101 +255,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
           aria-hidden="true"
           aria-labelledby="exampleModalToggleLabel"
         >
-          <div
-            className=" modal-dialog modal-dialog-centered  h-80 bg-white border-2  border-white rounded-3xl text-white "
-            id="exampleModalToggleDiv"
-          >
-            <div className="modal-content p-5 h-80 w-56 justify-center items-center rounded-3xl bg-transparent   text-emerald-50">
-              <form onSubmit={this.handleSubmit}>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="DId"
-                  label="Doctor Id"
-                  name="DId"
-                  autoFocus
-                  type="text"
-                  value={this.state.DId}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="text"
-                  label="Doctor Name"
-                  name="DName"
-                  autoFocus
-                  value={this.state.DName}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="position"
-                  label="position"
-                  type="text"
-                  id="position"
-                  value={this.state.position}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="time"
-                  label="Time"
-                  type="text"
-                  id="time"
-                  value={this.state.time}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="contact"
-                  label="contact"
-                  type="text"
-                  id="contact"
-                  value={this.state.contact}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="DCharge"
-                  label="DCharge"
-                  type="number"
-                  id="DCharge"
-                  value={this.state.DCharge}
-                  onChange={this.handleInput}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="wardNo"
-                  label="WardNo"
-                  type="number"
-                  id="WardNo"
-                  value={this.state.wardNo}
-                  onChange={this.handleInput}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 1, mb: 2 }}
-                >
-                  Register
-                </Button>
-              </form>
-            </div>
-          </div>
+       
         </div>
       </>
     );
