@@ -223,6 +223,7 @@ export default class Login extends Component<PatientProps, PatientState> {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            type="button"
                           >
                             Sign In
                           </Button>
@@ -246,7 +247,7 @@ export default class Login extends Component<PatientProps, PatientState> {
             className=" modal-dialog modal-dialog-centered backdrop-blur-3xl border-2  border-white rounded-3xl text-white "
             id="exampleModalToggleDiv"
           >
-            <div className="modal-content  h-72 w-56 justify-center items-center rounded-3xl bg-transparent   text-emerald-50">
+            <div className="modal-content pr-5 pl-5 h-72 w-56 justify-center items-center rounded-3xl bg-transparent   text-emerald-50">
               <div>
                 <h1>Register</h1>
               </div>

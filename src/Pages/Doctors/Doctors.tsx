@@ -89,7 +89,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
       .catch((error) => {});
   };
   loadDoctors = () => {
-    axios.get(`doctor/Doctor`).then((res) => {
+    axios.get(`doctor?position=Hospital`).then((res) => {
       console.log(res.data.responseData + "positions");
       this.setState((prevState) => ({
         ...prevState,
@@ -98,7 +98,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
     });
   };
   loadHospital = () => {
-    axios.get(`doctor/Hospital`).then((res) => {
+    axios.get(`doctor?position=Hospital`).then((res) => {
       console.log(res.data.responseData + "positions");
       this.setState((prevState) => ({
         ...prevState,
@@ -107,7 +107,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
     });
   };
   loadSpecialization = () => {
-    axios.get(`doctor/Specialization`).then((res) => {
+    axios.get(`doctor?position=Specialize`).then((res) => {
       console.log(res.data.responseData + "positions");
       this.setState((prevState) => ({
         ...prevState,
@@ -115,6 +115,15 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
       }));
     });
   };
+  getAllDoctors = ()=>{
+    axios.get("doctor?position=Doctor").then((res)=>{
+      console.log(res.data.responseData);
+      this.setState((prevState)=>({
+        ...prevState,
+        DoctorList:res.data.responseData,
+      }))
+    });
+  }
 
   render() {
     return (
@@ -259,5 +268,5 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
         </div>
       </>
     );
-  }
+                    }
 }

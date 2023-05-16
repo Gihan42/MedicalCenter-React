@@ -54,7 +54,7 @@ export default class Profile extends Component <DoctorProps, DoctorState> {
   }
 
   load = (event:any)=>{
-    axios.get(`doctor/${event.target.value}`).then((res)=>{
+    axios.get(`doctor?position=${event.target.value}`).then((res)=>{
       console.log(res.data.responseData +"positions");
       this.setState((prevState)=>({
         ...prevState,

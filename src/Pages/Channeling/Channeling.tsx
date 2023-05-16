@@ -36,13 +36,13 @@ type DoctorDetails = {
 type DoctorProps = {};
 type DoctorState = {
   DoctorList: DoctorDetails[];
-  // DId: string;
-  // DName: string;
-  // position: string;
-  // time:string;
-  // contact:string;
-  // DCharge:number;
-  // wardNo:number;
+  DId: string;
+  DName: string;
+  position: string;
+  time:string;
+  contact:string;
+  DCharge:number;
+  wardNo:number;
 };
 
 export default class Channeling extends Component <DoctorProps,DoctorState>{
@@ -51,6 +51,13 @@ constructor (props:DoctorProps){
     super(props) ;
     this.state = {
       DoctorList:[],
+      DId: "",
+      DName: "",
+      position: "",
+      time:"",
+      contact:"",
+      DCharge:0, 
+      wardNo:0,
     };
 }
  componentDidMount(): void {
@@ -68,12 +75,27 @@ constructor (props:DoctorProps){
   }
 
   load = (event:any)=>{
-    axios.get(`doctor/${event.target.value}`).then((res)=>{
+    axios.get(`doctor?position=${event.target.value}`).then((res)=>{
       console.log(res.data.responseData +"positions");
       this.setState((prevState)=>({
         ...prevState,
         DoctorList:res.data.responseData, 
       }))
+    });
+  }
+  searcDoctor =()=>{
+    axios.get(`doctor?position=${this.state.DName}`).then((res)=>{
+      const { DId, DName, position, time, contact, DCharge, wardNo } = res.data.responseData;
+        this.setState((prevState )=>({
+          ...prevState,
+          DId: DId,
+          DName: DName,
+          position: position,
+          time: time,
+          contact: contact,
+          DCharge: DCharge,
+          wardNo: wardNo,
+        })); 
     });
   }
   render() {
@@ -122,23 +144,23 @@ constructor (props:DoctorProps){
                     <option value={"Doctor"}>Doctors</option>
                     <option value={"Hospital"}>Hospital</option>
                   </select>
-                  <select className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
+                  <select onClick={this.searcDoctor} typeof='button' className=" form-select form-select-md pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
                      {this.state.DoctorList.map((doctor)=>(
                         <option value={doctor.DName}>{doctor.DName}</option>
                       ))}
                   </select>
                 </div>
             <div className='flex justify-start space-x-8 mt-3'> 
-                    <h1 className='text-2xl text-sky-900 '>Doctor Chargers</h1><h1 className='text-2xl '>2500.00</h1>
+                    <h1 className='text-2xl text-sky-900 '>Doctor Chargers</h1><h1 className='text-2xl '> {this.state.DCharge}</h1>
             </div>
             <div className='flex justify-start space-x-8 mt-3'> 
-                    <h1 className='text-2xl text-sky-900 '>Wards No</h1><h1 className='text-2xl '>02</h1>
+                    <h1 className='text-2xl text-sky-900 '>Wards No</h1><h1 className='text-2xl '>{this.state.wardNo}</h1>
             </div>
             <div className='flex justify-start space-x-8 mt-3'> 
-                    <h1 className='text-2xl text-sky-900 '>Time</h1><h1 className='text-2xl '>4.00 p.m</h1>
+                    <h1 className='text-2xl text-sky-900 '>Time</h1><h1 className='text-2xl '>{this.state.time}</h1>
             </div>
             <div className='flex justify-start space-x-8 mt-3'> 
-                    <h1 className='text-2xl text-sky-900 '>Hospital</h1><h1 className='text-2xl '>Matarat General Hospital</h1>
+                    <h1 className='text-2xl text-sky-900 '>Dpctor Id</h1><h1 className='text-2xl '>{this.state.DId}</h1>
             </div>
             <Button
             
