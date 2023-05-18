@@ -54,7 +54,7 @@ export default class Profile extends Component <DoctorProps, DoctorState> {
   }
 
   load = (event:any)=>{
-    axios.get(`doctor?position=${event.target.value}`).then((res)=>{
+    axios.get(`doctor/${event.target.value}`).then((res)=>{
       console.log(res.data.responseData +"positions");
       this.setState((prevState)=>({
         ...prevState,
@@ -62,6 +62,35 @@ export default class Profile extends Component <DoctorProps, DoctorState> {
       }))
     });
   }
+  /////////////////////////////////
+  loadDoctors = () => {
+    axios.get(`doctor/Doctor`).then((res) => {
+      console.log(res.data.responseData + "position");
+      this.setState((prevState) => ({
+        ...prevState,
+        DoctorList: res.data.responseData,
+      }));
+    });
+    
+  };
+  loadHospital = () => {
+    axios.get(`doctor/Hospital`).then((res) => {
+      console.log(res.data.responseData + "position");
+      this.setState((prevState) => ({
+        ...prevState,
+        hospitals: res.data.responseData,
+      }));
+    });
+  };
+  loadSpecialization = () => {
+    axios.get(`doctor/Specialize`).then((res) => {
+      console.log(res.data.responseData + "position");
+      this.setState((prevState) => ({
+        ...prevState,
+        spe: res.data.responseData,
+      }));
+    });
+  };
   render() {
     return (
         <>
@@ -86,12 +115,12 @@ export default class Profile extends Component <DoctorProps, DoctorState> {
                 <div className='flex justify-start space-x-8 mt-3'> 
                     <h1 className='text-3xl text-sky-900 '>Doctor Name</h1>
                      <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example"onChange={this.load}>
-                    <option value={"Specialization"}>Specialization</option>
+                     <option value={"Specialization"}>Specialization</option>
                     <option value={"Doctor"}>Doctors</option>
                     <option value={"Hospital"}>Hospital</option>
                   </select>
                   <select className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl" aria-label=".form-select-sm example">
-                    {this.state.DoctorList.map((doctor)=>(
+                  {this.state.DoctorList.map((doctor)=>(
                         <option value={doctor.DName}>{doctor.DName}</option>
                       ))}
                     

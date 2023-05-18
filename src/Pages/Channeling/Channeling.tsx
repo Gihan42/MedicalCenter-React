@@ -105,17 +105,7 @@ constructor (props:DoctorProps){
       }));
     });
   };
-//   loadNames = () =>{
-// if(){
 
-// }
-// else if(){
-
-// }
-// else(){
-
-// }
-//   };
   render() {
     return (
       <>
