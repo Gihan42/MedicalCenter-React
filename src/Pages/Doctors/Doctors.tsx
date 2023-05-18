@@ -28,9 +28,9 @@ type DoctorState = {
   contact: string;
   DCharge: number;
   wardNo: number;
-  hospitals: [];
-  doctors: [];
-  spe: [];
+  hospitals: DoctorDetails[];
+  doctors: DoctorDetails[];
+  spe: DoctorDetails[];
 };
 export default class Doctors extends Component<DoctorProps, DoctorState> {
   constructor(props: DoctorProps) {
@@ -60,7 +60,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
     }));
   };
   componentDidMount(): void {
-    // this.handleInput();
+    //this.handleInput();
     this.loadHospital();
     this.loadDoctors();
     this.loadSpecialization();
@@ -89,17 +89,18 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
       .catch((error) => {});
   };
   loadDoctors = () => {
-    axios.get(`doctor?position=Hospital`).then((res) => {
-      console.log(res.data.responseData + "positions");
+    axios.get(`doctor/Doctor`).then((res) => {
+      console.log(res.data.responseData + "position");
       this.setState((prevState) => ({
         ...prevState,
         DoctorList: res.data.responseData,
       }));
     });
+    
   };
   loadHospital = () => {
-    axios.get(`doctor?position=Hospital`).then((res) => {
-      console.log(res.data.responseData + "positions");
+    axios.get(`doctor/Hospital`).then((res) => {
+      console.log(res.data.responseData + "position");
       this.setState((prevState) => ({
         ...prevState,
         hospitals: res.data.responseData,
@@ -107,23 +108,23 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
     });
   };
   loadSpecialization = () => {
-    axios.get(`doctor?position=Specialize`).then((res) => {
-      console.log(res.data.responseData + "positions");
+    axios.get(`doctor/Specialize`).then((res) => {
+      console.log(res.data.responseData + "position");
       this.setState((prevState) => ({
         ...prevState,
         spe: res.data.responseData,
       }));
     });
   };
-  getAllDoctors = ()=>{
-    axios.get("doctor?position=Doctor").then((res)=>{
-      console.log(res.data.responseData);
-      this.setState((prevState)=>({
-        ...prevState,
-        DoctorList:res.data.responseData,
-      }))
-    });
-  }
+  // getAllDoctors = ()=>{
+  //   axios.get("doctor?position=Doctor").then((res)=>{
+  //     console.log(res.data.responseData);
+  //     this.setState((prevState)=>({
+  //       ...prevState,
+  //       DoctorList:res.data.responseData,
+  //     }))
+  //   });
+  // }
 
   render() {
     return (
@@ -153,6 +154,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     role="tab"
                     aria-controls="home-tab-pane"
                     aria-selected="true"
+                    onClick={this.loadDoctors}
                   >
                     Doctors
                     
@@ -171,6 +173,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     role="tab"
                     aria-controls="profile-tab-pane"
                     aria-selected="false"
+                    onClick={this.loadSpecialization}
                   >
                     Specialization
                   </button>
@@ -185,6 +188,7 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     role="tab"
                     aria-controls="nav-contact"
                     aria-selected="false"
+                    onClick={this.loadHospital}
                   >
                     Hospital
                   </button>
@@ -229,8 +233,18 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     className="flex justify-center items-center"
                     id="generalTab"
                   >
-                    {this.state.spe.map(() => (
-                      <Card position="Specialization" DName="Sandun" DCharge={100} wardNo={5} time="12.30"/>
+                    {/* {this.state.spe.map(() => (
+                      <Card position="Specialization" DName={Speciali} DCharge={100} wardNo={5} time="12.30"/>
+                    ))} */}
+                      {this.state.spe.map((doctor) => (
+                      <Card
+                        position="Specialization"
+                        DName={doctor.DName}
+                        DCharge={doctor.DCharge}
+                        wardNo={doctor.wardNo}
+                        time={doctor.time}
+
+                      />
                     ))}
                     {/* <Card position={"Specialization"}/><Card position={"Specialization"}/><Card position={"Specialization"}/> */}
                   </div>
@@ -247,10 +261,19 @@ export default class Doctors extends Component<DoctorProps, DoctorState> {
                     className="flex justify-center items-center"
                     id="luxuryTab"
                   >
-                    {this.state.hospitals.map(() => (
+                    {/* {this.state.hospitals.map(() => (
                       <Card position="Hospital" DName="Gihan" DCharge={100} wardNo={5} time="12.30" />
-                    ))}
+                    ))} */}
+                          {this.state.hospitals.map((doctor) => (
+                      <Card
+                        position="Hospital"
+                        DName={doctor.DName}
+                        DCharge={doctor.DCharge}
+                        wardNo={doctor.wardNo}
+                        time={doctor.time}
 
+                      />
+                    ))}
                     {/* <Card position={"Hospital"}/> <Card position={"Hospital"}/>  <Card position={"Hospital"}/>  */}
                   </div>
                 </div>
