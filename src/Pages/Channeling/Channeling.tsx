@@ -36,17 +36,19 @@ type DoctorDetails = {
 };
 type DoctorProps = {};
 type DoctorState = {
-  appoinmentNo: "";
-  p_Name: "";
-  p_Age: "";
-  p_Address: "";
-  appoinmentDate: "";
-  d_Name: "";
-  d_Charges: "";
-  wardNo: "";
-  bill: "";
-  paymentDAte: "";
-  time: "";
+  p_Name: string;
+  p_Age: string;
+  p_Address: string;
+  appoinmentDate: string;
+  d_Name: string;
+  d_Charges: string;
+  wardNo: string;
+  bill: string;
+  paymentDAte: string;
+  time: string;
+  appoinmentNo: number;
+  userName: string;
+  channelingDate: string;
   DoctorList: DoctorDetails[];
   PatientDetails: PatientDetails;
   DoctorDetails: DoctorDetails;
@@ -96,7 +98,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
   constructor(props: DoctorProps) {
     super(props);
     this.state = {
-      appoinmentNo: "",
+      appoinmentNo: 0,
       p_Name: "",
       p_Age: "",
       p_Address: "",
@@ -107,6 +109,8 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
       bill: "",
       paymentDAte: "",
       time: "",
+      userName: "",
+      channelingDate: "",
       DoctorList: [],
       PatientDetails: { email: "" },
       DoctorDetails: {
@@ -181,6 +185,16 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
 
   ////////////////////////////////
 
+  handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = event.target;
+    const inputValue = type == "number" ? parseInt(value) : value;
+
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   searcPatient = () => {
     axios.get(`patient/${this.state.PatientDetails.email}`).then((res) => {
       const { email, userName, password } = res.data.responseData;
@@ -217,7 +231,52 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
       });
     });
   };
-
+  /////////////////////////
+  handleSubmit = (event: any) => {
+    event.preventDefault();
+    const { channelingDate, userName, appoinmentNo } = this.state;
+    let newChannelling = {
+      channelingDate: this.state.channelingDate,
+      userName: this.state.PatientAllDetails.userName,
+      appoinmentNo: appoinmentNo,
+    };
+    axios.post(`channeling`, newChannelling).then((res) => {
+      let newChannellingDetail = {
+        appoinmentNo: this.state.appoinmentNo,
+        p_Name: this.state.PatientAllDetails.userName,
+        p_Age: this.state.p_Age,
+        p_Address: this.state.p_Address,
+        appoinmentDate: this.state.channelingDate,
+        d_Name: this.state.DoctorDetails.DName,
+        d_Charges: this.state.DoctorDetails.DCharge,
+        wardNo: this.state.DoctorDetails.wardNo,
+        bill: " ",
+        paymentDAte: this.state.paymentDAte,
+        time: this.state.DoctorDetails.time,
+        userName: this.state.userName,
+        channelingDate: this.state.channelingDate,
+        // appoinmentNo: number;
+        // p_Name: string;
+        // p_Age: number;
+        // p_Address: string;
+        // appoinmentDate: string;
+        // d_Name: string;
+        // d_Charges: number;
+        // wardNo: number;
+        // bill: number;
+        // paymentDAte: string;
+        // time: string;
+      };
+      axios
+        .post(
+          "http://localhost:5000/api/v1/channelingDetails",
+          newChannellingDetail
+        )
+        .then((res) => {
+          alert("Saved");
+        });
+    });
+  };
   render() {
     return (
       <>
@@ -286,6 +345,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       label="enter your age"
                       variant="standard"
                       type="number"
+                      name="p_Age"
+                      value={this.state.p_Age}
+                      onChange={this.handleInput}
                       // value={this.state.PatientAllDetails.age}
                       // onChange={(event) => {
                       //   this.setState({
@@ -301,6 +363,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       label="enter your address"
                       variant="standard"
                       type="text"
+                      name="p_Address"
+                      value={this.state.p_Address}
+                      onChange={this.handleInput}
                     />
                   </div>
                   <div className="flex justify-start space-x-8 mt-3">
@@ -316,6 +381,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       label=" "
                       variant="standard"
                       type="date"
+                      name="channelingDate"
+                      value={this.state.channelingDate}
+                      onChange={this.handleInput}
                     />
                   </div>
                 </form>
@@ -352,18 +420,21 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                     <h1 className="text-2xl text-sky-900 ">Doctor Chargers</h1>
                     <h1 className="text-2xl ">
                       {this.state.DoctorDetails.DCharge}
+                      {this.state.d_Charges}
                     </h1>
                   </div>
                   <div className="flex justify-start space-x-8 mt-3">
                     <h1 className="text-2xl text-sky-900 ">Wards No</h1>
                     <h1 className="text-2xl ">
                       {this.state.DoctorDetails.wardNo}
+                      {this.state.wardNo}
                     </h1>
                   </div>
                   <div className="flex justify-start space-x-8 mt-3">
                     <h1 className="text-2xl text-sky-900 ">Time</h1>
                     <h1 className="text-2xl ">
                       {this.state.DoctorDetails.time}
+                      {this.state.time}
                     </h1>
                   </div>
                   <div className="flex justify-start space-x-8 mt-3">
@@ -374,6 +445,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 1, mb: 2, backgroundColor: "#283747" }}
+                    onClick={this.handleSubmit}
                   >
                     Conform
                   </Button>
@@ -433,6 +505,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       label=" "
                       variant="standard"
                       type="date"
+                      name="paymentDAte"
+                      value={this.state.paymentDAte}
+                      onChange={this.handleInput}
                     />
                   </div>
                 </div>
