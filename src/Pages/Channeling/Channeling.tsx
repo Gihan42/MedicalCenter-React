@@ -24,6 +24,8 @@ import amex from "../../assets/image/american-express.png";
 import axios from "../../axios";
 import Doctors from "../Doctors/Doctors";
 import { log } from "console";
+import { title } from "process";
+import Swal from "sweetalert2";
 
 type DoctorDetails = {
   DId: string;
@@ -48,11 +50,13 @@ type DoctorState = {
   time: string;
   appoinmentNo: number;
   userName: string;
+  email: string;
   channelingDate: string;
   DoctorList: DoctorDetails[];
   PatientDetails: PatientDetails;
   DoctorDetails: DoctorDetails;
   PatientAllDetails: PatientAllDetails;
+
   // DId: string;
   // DName: string;
   // position: string;
@@ -112,6 +116,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
       userName: "",
       channelingDate: "",
       DoctorList: [],
+      email:"",
       PatientDetails: { email: "" },
       DoctorDetails: {
         DId: "",
@@ -235,46 +240,47 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
   handleSubmit = (event: any) => {
     event.preventDefault();
     const { channelingDate, userName, appoinmentNo } = this.state;
-    let newChannelling = {
+
+    let channellingDetail = {
+      appoinmentNo: this.state.appoinmentNo,
+      p_Name: this.state.PatientAllDetails.userName,
+      p_Age: this.state.p_Age,
+      p_Address: this.state.p_Address,
+      appoinmentDate: this.state.channelingDate,
+      d_Name: this.state.DoctorDetails.DName,
+      d_Charges: this.state.DoctorDetails.DCharge,
+      wardNo: this.state.DoctorDetails.wardNo,
+      bill: " ",
+      paymentDAte: this.state.paymentDAte,
+      time: this.state.DoctorDetails.time,
+      userName: this.state.userName,
+      channelingDate: this.state.channelingDate,
+      emial:this.state.email,
+    };
+
+    let channelling = {
       channelingDate: this.state.channelingDate,
       userName: this.state.PatientAllDetails.userName,
       appoinmentNo: appoinmentNo,
     };
-    axios.post(`channeling`, newChannelling).then((res) => {
-      let newChannellingDetail = {
-        appoinmentNo: this.state.appoinmentNo,
-        p_Name: this.state.PatientAllDetails.userName,
-        p_Age: this.state.p_Age,
-        p_Address: this.state.p_Address,
-        appoinmentDate: this.state.channelingDate,
-        d_Name: this.state.DoctorDetails.DName,
-        d_Charges: this.state.DoctorDetails.DCharge,
-        wardNo: this.state.DoctorDetails.wardNo,
-        bill: " ",
-        paymentDAte: this.state.paymentDAte,
-        time: this.state.DoctorDetails.time,
-        userName: this.state.userName,
-        channelingDate: this.state.channelingDate,
-        // appoinmentNo: number;
-        // p_Name: string;
-        // p_Age: number;
-        // p_Address: string;
-        // appoinmentDate: string;
-        // d_Name: string;
-        // d_Charges: number;
-        // wardNo: number;
-        // bill: number;
-        // paymentDAte: string;
-        // time: string;
-      };
-      axios
-        .post(
-          "http://localhost:5000/api/v1/channelingDetails",
-          newChannellingDetail
-        )
-        .then((res) => {
-          alert("Saved");
-        });
+
+    let obj = {
+      channelling: channelling,
+      channellingDetail: channellingDetail,
+    };
+    axios.post(`channeling`, obj).then((res) => {
+      console.log(res.data);
+      Swal.fire({
+        title: "Appoiment Submited. your Appoiment Number is -"+res.data.responseData,
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+
+     
     });
   };
   render() {
@@ -291,7 +297,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
           <div className="grid grid-cols-3 gap-3 pr-20 pl-20 p-3 w-auto">
             <section className=" w-auto">
               {/* column 01 */}
-              <div className=" border-2 border-gray-700 pl-5 rounded-3xl backdrop-blur-3xl bg-transparent pr-5 pt-3 pb-2 shadow-2xl shadow-black">
+              <div className=" border-2 border-gray-700 pl-5 pb-12 rounded-3xl backdrop-blur-3xl bg-transparent pr-5 pt-3  shadow-2xl shadow-black">
                 <form action="">
                   <div className="justify-start flex space-x-5 ">
                     <h2 className="text-2xl mt-3 text-sky-900 ">
@@ -308,6 +314,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       type="email"
                       autoComplete="email"
                       variant="standard"
+                      
                     />
                     <button
                       type="button"
@@ -368,9 +375,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       onChange={this.handleInput}
                     />
                   </div>
-                  <div className="flex justify-start space-x-8 mt-3">
-                    <h1 className="text-2xl text-sky-900 ">Appoinment No</h1>
-                    <h1 className="text-2xl ">01</h1>
+                  <div className="flex justify-start space-x-8 pt-2 ">
+                    {/* <h1 className="text-2xl text-sky-900 ">Appoinment No</h1>
+                    <h1 className="text-2xl ">01</h1> */}
                   </div>
                   <div className="flex justify-start space-x-8 ">
                     <h1 className="text-2xl text-sky-900 mt-3 ">

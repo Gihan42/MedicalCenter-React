@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import  bgImage from '../../assets/rm222batch2-mind-03.jpg';
 import axios from '../../axios';
 import { Margin } from '@mui/icons-material';
+import { stat } from 'fs';
 
 
 type DoctorDetails = {
@@ -24,20 +25,39 @@ type DoctorDetails = {
   // userName: string;
   // password: string;
 };
+type ChannelDetails = {
+  appoinmentNo: number;
+  p_Name: string;
+  p_Age: number;
+  p_Address: string;
+  appoinmentDate: string;
+  d_Name: string;
+  d_Charges: number;
+  wardNo: number;
+  bill: number;
+  paymentDAte: string;
+  time: string;
+};
 type DoctorProps = {};
 type DoctorState = {
   DoctorList: DoctorDetails[];
   PatientDetails: PatientDetails[];
+  ChannelDetails: ChannelDetails[];
+  DateDetails: ChannelDetails[];
   email: string;
   userName: string;
   password: string;
-  // DId: string;
-  // DName: string;
-  // position: string;
-  // time:string;
-  // contact:string;
-  // DCharge:number;
-  // wardNo:number;
+  appoinmentNo: number;
+  p_Name: string;
+  p_Age: number;
+  p_Address: string;
+  appoinmentDate: string;
+  d_Name: string;
+  d_Charges: number;
+  wardNo: number;
+  bill: number;
+  paymentDAte: string;
+  time: string;
 };
 
 type PatientDetails = {
@@ -52,13 +72,27 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
     this.state = {
       DoctorList: [],
       PatientDetails: [],
+      ChannelDetails: [],
+      DateDetails: [],
       email: "",
       userName: "",
       password: "",
+      appoinmentNo: 0,
+      p_Name: "",
+      p_Age: 0,
+      p_Address: "",
+      appoinmentDate: "",
+      d_Name: "",
+      d_Charges: 0,
+      wardNo: 0,
+      bill: 0,
+      paymentDAte: "",
+      time: "",
     };
   }
   componentDidMount(): void {
     this.getAllDoctors();
+   // this.getAllApponmentByDate();
   }
 
   getAllDoctors = () => {
@@ -148,7 +182,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
   };
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { email, userName, password } = this.state;
+    const { email, userName, password, appoinmentNo } = this.state;
     let newPatient = {
       email: email,
       userName: userName,
@@ -165,6 +199,87 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
       })
       .catch((error) => {
         alert("not deleted");
+      });
+  };
+  /////////////////////////////////
+  searchChanneling = () => {
+    axios.get(`channelingDetails/${this.state.appoinmentNo}`).then((res) => {
+      const {
+        appoinmentNo,
+        p_Name,
+        p_Age,
+        p_Address,
+        appoinmentDate,
+        d_Name,
+        d_Charges,
+        wardNo,
+        bill,
+        paymentDAte,
+        time,
+      } = res.data.responseData;
+      this.setState((prevState) => ({
+        ...prevState,
+        appoinmentNo: appoinmentNo,
+        p_Name: p_Name,
+        p_Age: p_Age,
+        p_Address: p_Address,
+        appoinmentDate: appoinmentDate,
+        d_Name: d_Name,
+        d_Charges: d_Charges,
+        wardNo: wardNo,
+        bill: bill,
+        paymentDAte: paymentDAte,
+        time: time,
+      }));
+    });
+  };
+  deleteChannelling = () => {
+    axios
+      .delete(`channelingDetails/${this.state.appoinmentNo}`)
+      .then((res) => {
+        alert(res.data.message);
+        // this.getAllDoctors();
+        // this.clearData();
+      })
+      .catch((error) => {
+        alert("not deleted");
+      });
+  };
+  updateChannelling = () => {
+    let Channelling = {
+      appoinmentNo: this.state.appoinmentNo,
+      p_Name: this.state.p_Name,
+      p_Age: this.state.p_Age,
+      p_Address: this.state.p_Address,
+      appoinmentDate: this.state.appoinmentDate,
+      d_Name: this.state.d_Name,
+      d_Charges: this.state.d_Charges,
+      wardNo: this.state.wardNo,
+      bill: this.state.bill,
+      paymentDAte: this.state.paymentDAte,
+      time: this.state.time,
+    };
+    axios
+      .put(`channelingDetails/${this.state.appoinmentNo}`, Channelling)
+      .then((res) => {
+        alert(res.data.message);
+        // this.getAllDoctors();
+        // this.clearData();
+      })
+      .catch((error) => {
+        alert("something went wrong");
+      });
+  };
+  
+  getAllApponmentByDate = () => {
+    axios
+      .get(`channelingDetails/search/${this.state.appoinmentDate}`)
+      .then((res) => {
+        console.log(res.data.responseData);
+        this.setState((prevState) => ({
+          ...prevState,
+          DateDetails: res.data.responseData,
+        }));
       });
   };
   render() {
@@ -202,25 +317,67 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                       >
                         Search <SearchIcon />
                       </button>
+
                     </div>
                     <div className="justify-center border-2 border-abc-100 mt-1 rounded-2xl pt-4 pb-3 bg-transparent backdrop-blur-3xl pl-8 shadow-2xl shadow-black">
                       <h1 className="text-green-700">Your Appoinment</h1>
                       <div className="flex justify-start space-x-8 mt-3">
                         <h1 className="text-3xl text-sky-900 mt-3">
-                          Appointment No
+                          *Appointment No
                         </h1>
-                         <TextField
+                        <TextField
                           id="standard-basic"
                           label=" enter your appoinment number"
                           variant="standard"
                           type="text"
                           placeholder="enter your appoinment number"
-                          sx={{ width: 235, fontSize: 20, marginBottom:2}}
+                          name="appoinmentNo"
+                          onClick={this.searchChanneling}
+                          onChange={this.handleInput}
+                          value={this.state.appoinmentNo}
+                          sx={{ width: 235, fontSize: 20, marginBottom: 2 }}
                         />
+                        <button
+                          type="button"
+                          className="btn btn-warning "
+                          onClick={this.searchChanneling}
+                         // onClick={this.getAllApponmentByEmail}
+                        >
+                          Find Your Appoinment <SearchIcon />
+                        </button>
                       </div>
                       <div className="flex justify-start space-x-8 mt-3">
-                        <h1 className="text-3xl text-sky-900 ">Doctor Name</h1>
-                        <select
+                        <h1 className="text-3xl text-sky-900 mt-2">
+                          *Patient Age{" "}
+                        </h1>
+                        <TextField
+                          id="standard-basic"
+                          label=" enter patient name"
+                          variant="standard"
+                          type="text"
+                          placeholder="enter patient name"
+                          name="p_Age"
+                          onClick={this.searchChanneling}
+                          onChange={this.handleInput}
+                          value={this.state.p_Age}
+                          sx={{ width: 70, fontSize: 20, marginBottom: 2 }}
+                        />
+                        <h1 className="text-3xl text-sky-900 mt-1">
+                          *patient Name
+                        </h1>
+                        <TextField
+                          id="standard-basic"
+                          label=" enter patient name"
+                          variant="standard"
+                          type="text"
+                          placeholder="enter patient name"
+                          name="p_Name"
+                          onClick={this.searchChanneling}
+                          onChange={this.handleInput}
+                          value={this.state.p_Name}
+                          sx={{ width: 200, fontSize: 20, marginBottom: 2 }}
+                        />
+                        {/* <select
                           className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl"
                           aria-label=".form-select-sm example"
                           onChange={this.load}
@@ -230,19 +387,19 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                           </option>
                           <option value={"Doctor"}>Doctors</option>
                           <option value={"Hospital"}>Hospital</option>
-                        </select>
-                        <select
+                        </select> */}
+                        {/* <select
                           className=" form-select form-select-lg pl-10 pr-12 border-2 border-lime-500 bg-transparent h-14  w-auto text-3xl"
                           aria-label=".form-select-sm example"
                         >
                           {this.state.DoctorList.map((doctor) => (
                             <option value={doctor.DName}>{doctor.DName}</option>
                           ))}
-                        </select>
+                        </select> */}
                       </div>
                       <div className="flex justify-start space-x-8 mt-2">
                         <h1 className="text-3xl text-sky-900 mt-2 ">
-                          Appointment Date
+                          *Appointment Date
                         </h1>
                         <TextField
                           id="standard-basic"
@@ -250,24 +407,32 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                           variant="standard"
                           type="date"
                           sx={{ width: 235, fontSize: 20 }}
+                          value={this.state.appoinmentDate}
                         />
                       </div>
                       <div className="flex justify-start space-x-8 mt-3">
                         <h1 className="text-3xl text-sky-900 ">
-                          Your Payment{" "}
-                        </h1>{" "}
-                        <h2 className="text-3xl">5000,00</h2>
+                          *Your Payment{" "}
+                        </h1>
+                        <h2 className="text-3xl">{this.state.bill}</h2>
+                        <h1 className="text-3xl text-sky-900 ">*Doctor Name</h1>
+                        <h1 className="text-2xl mt-1 ">{this.state.d_Name} </h1>
                       </div>
                       <div className="flex justify-start space-x-8 mt-3">
-                        <h1 className="text-3xl text-sky-900 ">Wards No </h1>{" "}
-                        <h2 className="text-3xl">02</h2>
-                        <Button variant="contained" color="success">
+                        <h1 className="text-3xl text-sky-900 ">*Wards No </h1>{" "}
+                        <h2 className="text-3xl">{this.state.wardNo}</h2>
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={this.updateChannelling}
+                        >
                           Update
                         </Button>
                         <Button
                           variant="contained"
                           color="error"
                           startIcon={<DeleteIcon />}
+                          onClick={this.deleteChannelling}
                         >
                           Delete
                         </Button>
@@ -276,7 +441,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                     <div className="h-auto mt-3 p-2">
                       <table className="table">
                         <thead className="table-dark">
-                          <tr>
+                          <tr onClick={this.getAllApponmentByDate}>
                             <th scope="col">Appoinment No</th>
                             <th scope="col">Doctor</th>
                             <th scope="col">Wards No</th>
@@ -287,15 +452,18 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>A001</td>
-                            <td>Dr P Darshana</td>
-                            <td>02</td>
-                            <td>2023/06/06</td>
-                            <td>
-                              <CloseIcon />
-                            </td>
-                          </tr>
+                          {this.state.DateDetails.map((channel) => (
+                            <tr>
+                              <td>{channel.appoinmentNo}</td>
+                              <td>{channel.d_Name}</td>
+                              <td>{channel.wardNo}</td>
+                              <td>{channel.appoinmentDate}</td>
+                              <td>
+                                <CloseIcon />
+                              </td>
+                            </tr>
+                          ))}
+                          ;
                         </tbody>
                       </table>
                     </div>
