@@ -36,8 +36,8 @@ type DoctorDetails = {
   DCharge: number;
   wardNo: number;
 };
-type DoctorProps = {};
-type DoctorState = {
+type CommonProps = {};
+type CommonState = {
   p_Name: string;
   p_Age: string;
   p_Address: string;
@@ -56,6 +56,8 @@ type DoctorState = {
   PatientDetails: PatientDetails;
   DoctorDetails: DoctorDetails;
   PatientAllDetails: PatientAllDetails;
+  bileAmount: number;
+  totalAmount: number;
 
   // DId: string;
   // DName: string;
@@ -98,8 +100,8 @@ type Channel = {
   time: string;
 };
 
-export default class Channeling extends Component<DoctorProps, DoctorState> {
-  constructor(props: DoctorProps) {
+export default class Channeling extends Component<CommonProps, CommonState> {
+  constructor(props: CommonProps) {
     super(props);
     this.state = {
       appoinmentNo: 0,
@@ -116,7 +118,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
       userName: "",
       channelingDate: "",
       DoctorList: [],
-      email:"",
+      email: "",
       PatientDetails: { email: "" },
       DoctorDetails: {
         DId: "",
@@ -134,6 +136,8 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
         appoinmentNo: 0,
         appoinmentDate: "",
       },
+      bileAmount: 0,
+      totalAmount: 0,
     };
   }
   componentDidMount(): void {
@@ -223,6 +227,10 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
 
       const { DId, DName, contact, DCharge, time, wardNo } =
         res.data.responseData;
+
+      this.setState({ bileAmount: DCharge });
+      this.setState({ totalAmount: DCharge + 200 });
+
       this.setState({
         DoctorDetails: {
           DId: DId,
@@ -250,12 +258,12 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
       d_Name: this.state.DoctorDetails.DName,
       d_Charges: this.state.DoctorDetails.DCharge,
       wardNo: this.state.DoctorDetails.wardNo,
-      bill: " ",
+      bill: this.state.totalAmount,
       paymentDAte: this.state.paymentDAte,
       time: this.state.DoctorDetails.time,
       userName: this.state.userName,
       channelingDate: this.state.channelingDate,
-      emial:this.state.email,
+      emial: this.state.email,
     };
 
     let channelling = {
@@ -271,7 +279,9 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
     axios.post(`channeling`, obj).then((res) => {
       console.log(res.data);
       Swal.fire({
-        title: "Appoiment Submited. your Appoiment Number is -"+res.data.responseData,
+        title:
+          "Appoiment Submited. your Appoiment Number is -" +
+          res.data.responseData,
         showClass: {
           popup: "animate__animated animate__fadeInDown",
         },
@@ -279,10 +289,17 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-
-     
     });
   };
+
+  selectOption = (amount: number) => {
+    console.log(amount);
+
+    let total = this.state.totalAmount + amount;
+
+    this.setState({ totalAmount: total });
+  };
+
   render() {
     return (
       <>
@@ -314,7 +331,6 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                       type="email"
                       autoComplete="email"
                       variant="standard"
-                      
                     />
                     <button
                       type="button"
@@ -426,7 +442,7 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                   <div className="flex justify-start space-x-8 mt-3">
                     <h1 className="text-2xl text-sky-900 ">Doctor Chargers</h1>
                     <h1 className="text-2xl ">
-                      {this.state.DoctorDetails.DCharge}
+                      {this.state.DoctorDetails.DCharge.toFixed(2)}
                       {this.state.d_Charges}
                     </h1>
                   </div>
@@ -464,19 +480,33 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                 <div className="grid grid-rows-2   w-auto">
                   <h1 className="text-green-800 mb-7">Payment</h1>
                   <div className="flex justify-start space-x-4 pb-3">
-                    <button type="button" className="btn btn-danger">
+                    <button
+                      onClick={() => this.selectOption(4000)}
+                      type="button"
+                      className="btn btn-danger"
+                    >
                       Blood Testing :- Rs 4000.00
                     </button>
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      onClick={() => this.selectOption(3500)}
+                      type="button"
+                      className="btn btn-primary"
+                    >
                       X - Ray :- Rs 3500.00
                     </button>
-                    <button type="button" className="btn btn-secondary">
+                    <button
+                      onClick={() => this.selectOption(2500)}
+                      type="button"
+                      className="btn btn-secondary"
+                    >
                       Scan :- Rs 2500.00
                     </button>
                   </div>
                   <div className="flex justify-start">
                     <h1 className="text-2xl text-sky-900 ">Your Bill : Rs </h1>
-                    <h1 className="text-2xl">7000.00</h1>
+                    <h1 className="text-2xl ml-2">
+                      {(this.state.bileAmount + 200).toFixed(2)}
+                    </h1>
                   </div>
                   <div className="flex justify-start space-x-9 ">
                     <h1 className="text-2xl text-sky-900 gap-5 space-x-5 mr-5 mt-2">
@@ -498,10 +528,12 @@ export default class Channeling extends Component<DoctorProps, DoctorState> {
                     ></div>
                   </div>
                   <div className="flex justify-start mt-3">
-                    <h1 className="text-2xl text-sky-900 mb-0 ">
-                      Your Payment : Rs{" "}
+                    <h1 className="text-2xl text-sky-900 mb-0  ">
+                      Your Payment : Rs {" "}
                     </h1>
-                    <h1 className="text-2xl">8000.00</h1>
+                    <h1 className="text-2xl ml-2">
+                      {this.state.totalAmount.toFixed(2)}
+                    </h1>
                   </div>
                   <div className="flex justify-start ">
                     <h1 className="text-2xl text-sky-900  mr-4 mt-3">

@@ -1,17 +1,21 @@
-import React, { ChangeEvent, Component } from 'react'
-import Header from '../../components/Header/Header'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import TextField, { FilledTextFieldProps, OutlinedTextFieldProps, StandardTextFieldProps, TextFieldVariants } from '@mui/material/TextField';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button/Button';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import  bgImage from '../../assets/rm222batch2-mind-03.jpg';
-import axios from '../../axios';
-import { Margin } from '@mui/icons-material';
-import { stat } from 'fs';
-
+import React, { ChangeEvent, Component } from "react";
+import Header from "../../components/Header/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import TextField, {
+  FilledTextFieldProps,
+  OutlinedTextFieldProps,
+  StandardTextFieldProps,
+  TextFieldVariants,
+} from "@mui/material/TextField";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button/Button";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
+import bgImage from "../../assets/rm222batch2-mind-03.jpg";
+import axios from "../../axios";
+import { Margin } from "@mui/icons-material";
+import { stat } from "fs";
 
 type DoctorDetails = {
   DId: string;
@@ -92,7 +96,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
   }
   componentDidMount(): void {
     this.getAllDoctors();
-   // this.getAllApponmentByDate();
+    this.getAllApponmentByDate();
   }
 
   getAllDoctors = () => {
@@ -270,7 +274,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
         alert("something went wrong");
       });
   };
-  
+
   getAllApponmentByDate = () => {
     axios
       .get(`channelingDetails/search/${this.state.appoinmentDate}`)
@@ -317,7 +321,6 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                       >
                         Search <SearchIcon />
                       </button>
-
                     </div>
                     <div className="justify-center border-2 border-abc-100 mt-1 rounded-2xl pt-4 pb-3 bg-transparent backdrop-blur-3xl pl-8 shadow-2xl shadow-black">
                       <h1 className="text-green-700">Your Appoinment</h1>
@@ -340,8 +343,10 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                         <button
                           type="button"
                           className="btn btn-warning "
-                          onClick={this.searchChanneling}
-                         // onClick={this.getAllApponmentByEmail}
+                          onClick={
+                            (this.searchChanneling, this.getAllApponmentByDate)
+                          }
+                          // onClick={this.getAllApponmentByEmail}
                         >
                           Find Your Appoinment <SearchIcon />
                         </button>
@@ -441,14 +446,12 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                     <div className="h-auto mt-3 p-2">
                       <table className="table">
                         <thead className="table-dark">
-                          <tr onClick={this.getAllApponmentByDate}>
+                          <tr>
                             <th scope="col">Appoinment No</th>
                             <th scope="col">Doctor</th>
                             <th scope="col">Wards No</th>
                             <th scope="col">Date</th>
-                            <th scope="col">
-                              <DeleteIcon />
-                            </th>
+                          
                           </tr>
                         </thead>
                         <tbody>
@@ -458,12 +461,9 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                               <td>{channel.d_Name}</td>
                               <td>{channel.wardNo}</td>
                               <td>{channel.appoinmentDate}</td>
-                              <td>
-                                <CloseIcon />
-                              </td>
+                              
                             </tr>
                           ))}
-                          ;
                         </tbody>
                       </table>
                     </div>
