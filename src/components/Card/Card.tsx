@@ -111,7 +111,7 @@ export default class Card extends Component<DoctorProps, DoctorState> {
               <h2 className="text-lg text-slate-800">
               {/* {this.state.DoctorList.map((doctor) => (
                   doctor.position==this.props.position ? */}
-                    <><option value={this.props.DCharge}>Contact :{this.props.DCharge}</option></>
+                    <><option value={this.props.DCharge}>Charge rs:{this.props.DCharge}</option></>
                   
                 {/* ))} */}
               </h2>
@@ -129,7 +129,7 @@ export default class Card extends Component<DoctorProps, DoctorState> {
               <h2 className="text-lg text-slate-900">
               {/* {this.state.DoctorList.map((doctor) => (
                   doctor.position==this.props.position ? */}
-                    <><option value={this.props.time}>Charge :{this.props.time}</option></>
+                    <><option value={this.props.time}>time :{this.props.time}</option></>
                   
                 {/* ))} */}
               </h2>
