@@ -21,6 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Title from "../../components/Title/Title";
 import axios from "axios";
+import axioss from "../../axios";
 import { Link } from "react-router-dom";
 const theme = createTheme();
 
@@ -69,16 +70,51 @@ export default class Login extends Component<PatientProps, PatientState> {
       userName: userName,
       password: password,
     };
-    axios.post("http://localhost:5000/api/v1/patient", newPatient).then((res) => {
-      // this.setState((prevState)=>({
-      //     PatientList:[...prevState.PatientList, res.data.responseData]
-      // }));
-      if(res.status==200){
-        window.location.href = "http://localhost:3000/home"
+    axios
+      .post("http://localhost:5000/api/v1/patient", newPatient)
+      .then((res) => {
+        // this.setState((prevState)=>({
+        //     PatientList:[...prevState.PatientList, res.data.responseData]
+        // }));
+        if (res.status == 200) {
+          window.location.href = "http://localhost:3000/home";
+        }
+        console.log(res);
+      })
+      .catch((error) => {});
+  };
+  //////////////////////////////
+  loadAllPatient = () => {
+    axios.get("http://localhost:5000/api/v1/patient").then((res) => {
+      console.log(res.data.responseData + "patient");
+      this.setState((prevState) => ({
+        ...prevState,
+        patients: res.data.responseData,
+      }));
+
+    });
+  };
+  loginPatient = () => {
+    axioss.get(`patient/${this.state.email}`).then((res) => {
+      const { email, userName, password } = res.data.responseData;
+     
+      this.setState((prevState) => ({
+        ...prevState,
+        email: email,
+        userName: userName,
+        password: password,
+      }));
+
+      if (
+        res.data.responseData.email == this.state.email &&
+        res.data.responseData.password == this.state.password
+      ) {
+        window.location.href = "http://localhost:3000/home";
       }
-      console.log(res);
-      
-    }).catch((error)=>{});
+      else {
+        alert('Please Check Your Password &  Email')
+      }
+    });
   };
   render() {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -201,6 +237,8 @@ export default class Login extends Component<PatientProps, PatientState> {
                           name="email"
                           autoComplete="email"
                           autoFocus
+                          value={this.state.email}
+                          onChange={this.handleInput}
                         />
                         <TextField
                           margin="normal"
@@ -211,6 +249,8 @@ export default class Login extends Component<PatientProps, PatientState> {
                           type="password"
                           id="password"
                           autoComplete="current-password"
+                          value={this.state.password}
+                          onChange={this.handleInput}
                         />
                         <FormControlLabel
                           control={
@@ -218,16 +258,17 @@ export default class Login extends Component<PatientProps, PatientState> {
                           }
                           label="Remember me"
                         />
-                        <Link to={"/home"}>
+                        
                           <Button
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                             type="button"
+                            onClick={this.loginPatient}
                           >
                             Sign In
                           </Button>
-                        </Link>
+                        
                       </Box>
                     </Box>
                   </Container>
@@ -252,7 +293,7 @@ export default class Login extends Component<PatientProps, PatientState> {
                 <h1>Register</h1>
               </div>
               <form onSubmit={this.handleSubmit} className="text-white">
-                    {/* <Box
+                {/* <Box
                       sx={{
                         marginTop: 0,
                         display: "flex",
@@ -267,56 +308,56 @@ export default class Login extends Component<PatientProps, PatientState> {
                         noValidate
                         sx={{ mt: 1 }}
                       > */}
-                        <TextField
-                          margin="normal"
-                          required
-                          fullWidth
-                          id="email"
-                          label="Email Address"
-                          name="email"
-                          autoComplete="email"
-                          autoFocus
-                          type="text"
-                          value={this.state.email}
-                          onChange={this.handleInput}
-                        />
-                        <TextField
-                          style={{
-                            color: "red",
-                          }}
-                          margin="normal"
-                          required
-                          fullWidth
-                          id="text"
-                          label="User Name"
-                          name="userName"
-                          autoFocus
-                          value={this.state.userName}
-                          onChange={this.handleInput}
-                        />
-                        <TextField
-                          margin="normal"
-                          required
-                          fullWidth
-                          name="password"
-                          label="Password"
-                          type="password"
-                          id="password"
-                          autoComplete="current-password"
-                          value={this.state.password}
-                          onChange={this.handleInput}
-                        />
-                        {/* <Link to={"/home"}> */}
-                        <Button
-                          type="submit"
-                          fullWidth
-                          variant="contained"
-                          sx={{ mt: 3, mb: 2 }}
-                        >
-                          Register
-                        </Button>
-                        {/* </Link> */}
-                      {/* </Box>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleInput}
+                />
+                <TextField
+                  style={{
+                    color: "red",
+                  }}
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="text"
+                  label="User Name"
+                  name="userName"
+                  autoFocus
+                  value={this.state.userName}
+                  onChange={this.handleInput}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={this.state.password}
+                  onChange={this.handleInput}
+                />
+                {/* <Link to={"/home"}> */}
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Register
+                </Button>
+                {/* </Link> */}
+                {/* </Box>
                     </Box>
                   </Container>
                 </ThemeProvider> */}
