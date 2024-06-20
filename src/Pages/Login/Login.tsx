@@ -122,7 +122,7 @@ export default class Login extends Component<PatientProps, PatientState> {
     }
 
     return (
-      <>
+      <>-
         <div
           className="h-screen bg-cover  "
           style={{ backgroundImage: `url(${backgroundImage})` }}

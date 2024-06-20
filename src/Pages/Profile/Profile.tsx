@@ -521,6 +521,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                           name="password"
                           value={this.state.password}
                           onChange={this.handleInput}
+                          disabled={true}
                         />
                       </div>
                       <div className="justify-start flex space-x-5">
@@ -533,6 +534,7 @@ export default class Profile extends Component<DoctorProps, DoctorState> {
                           name="password"
                           value={this.state.password}
                           onChange={this.handleInput}
+                          disabled={true}
                         />
                       </div>
                       <div className="justify-start flex space-x-5 mt-4">
